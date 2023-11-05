@@ -10,11 +10,14 @@ GPIO.setmode(GPIO.BCM)
 
 # Set the PWM pin number and frequency
 pwm_pin = 18
-frequency = 1000
+
 # Initialize the PWM
-GPIO.setup(pwm_pin, GPIO.OUT)
-pwm = GPIO.PWM(pwm_pin, frequency)
-pwm.start(0)
+GPIO.setwarnings(False)
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(pwm_pin, GPIO.OUT, initial=GPIO.LOW)
+pwm = GPIO.PWM(pwm_pin)
+pwmPin = GPIO.PWM(pwm_pin, 100)
+pwmPin.start(0)
 socketio = SocketIO(app,cors_allowed_origins="*")  # Enable cross-origin access
 
 @app.route('/')
