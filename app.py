@@ -5,8 +5,6 @@ from w1thermsensor import W1ThermSensor
 import RPi.GPIO as GPIO
 
 app = Flask(__name__)
-# Set the GPIO mode to BCM
-GPIO.setmode(GPIO.BCM)
 
 # Set the PWM pin number and frequency
 pwm_pin = 18
