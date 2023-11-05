@@ -13,7 +13,6 @@ pwm_pin = 18
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(pwm_pin, GPIO.OUT, initial=GPIO.LOW)
-pwm = GPIO.PWM(pwm_pin)
 pwmPin = GPIO.PWM(pwm_pin, 100)
 pwmPin.start(0)
 socketio = SocketIO(app,cors_allowed_origins="*")  # Enable cross-origin access
@@ -25,7 +24,7 @@ def index():
 @app.route('/set_pwm', methods=['POST'])
 def set_pwm():
     duty_cycle = int(request.form['duty_cycle'])
-    pwm.ChangeDutyCycle(duty_cycle)
+    pwmPin.ChangeDutyCycle(duty_cycle)
     return 'PWM duty cycle set to {}'.format(duty_cycle)
 
 @app.route('/accelerometer')
