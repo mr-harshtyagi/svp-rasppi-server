@@ -1,39 +1,21 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Real-time Sensor Data</title>
+    <title>PWM Control</title>
   </head>
   <body>
-    <h1>Real-time Sensor Data</h1>
-
-    <div id="accelerometer-data">
-      <h2>Accelerometer Data</h2>
-      <pre id="accelerometer-values"></pre>
-    </div>
-
-    <div id="temperature-data">
-      <h2>Temperature Data</h2>
-      <pre id="temperature-value"></pre>
-    </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"></script>
-    <script>
-      var socket = io.connect(
-        "http://" + document.domain + ":" + location.port
-      );
-
-      socket.on("accelerometer_data", function (data) {
-        document.getElementById("accelerometer-values").innerHTML =
-          JSON.stringify(data, null, 2);
-      });
-
-      socket.on("temperature_data", function (data) {
-        document.getElementById("temperature-value").innerHTML = JSON.stringify(
-          data,
-          null,
-          2
-        );
-      });
-    </script>
+    <h1>PWM Control</h1>
+    <form method="post" action="/set_pwm">
+      Duty Cycle:
+      <input
+        type="number"
+        name="duty_cycle"
+        min="0"
+        max="100"
+        step="1"
+        required
+      />
+      <input type="submit" value="Set PWM" />
+    </form>
   </body>
 </html>
