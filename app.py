@@ -7,24 +7,38 @@ import RPi.GPIO as GPIO
 app = Flask(__name__)
 
 # Set the PWM pin number and frequency
-pwm_pin = 18
+pwm_pin1 = 18
+pwm_pin2 = 19
 
-# Initialize the PWM
+# Initialize the PWM Pin 1
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BOARD)
-GPIO.setup(pwm_pin, GPIO.OUT, initial=GPIO.LOW)
-pwmPin = GPIO.PWM(pwm_pin, 100)
-pwmPin.start(0)
+GPIO.setup(pwm_pin1, GPIO.OUT, initial=GPIO.LOW)
+pwmPin1 = GPIO.PWM(pwm_pin1, 100)
+pwmPin1.start(0)
+
+# Initialize the PWM Pin 2
+GPIO.setup(pwm_pin2, GPIO.OUT, initial=GPIO.LOW)
+pwmPin2 = GPIO.PWM(pwm_pin2, 100)
+pwmPin2.start(0)
+
 socketio = SocketIO(app,cors_allowed_origins="*")  # Enable cross-origin access
 
 @app.route('/')
 def index():
     return render_template('index.html')
 
-@app.route('/set_pwm', methods=['POST'])
+@app.route('/set_pwm1', methods=['POST'])
+def set_pwm():
+    print(request)
+    duty_cycle = int(request.form['duty_cycle'])
+    pwmPin1.ChangeDutyCycle(duty_cycle)
+    return 'PWM duty cycle set to {}'.format(duty_cycle)
+
+@app.route('/set_pwm2', methods=['POST'])
 def set_pwm():
     duty_cycle = int(request.form['duty_cycle'])
-    pwmPin.ChangeDutyCycle(duty_cycle)
+    pwmPin2.ChangeDutyCycle(duty_cycle)
     return 'PWM duty cycle set to {}'.format(duty_cycle)
 
 @app.route('/accelerometer')
