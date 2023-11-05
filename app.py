@@ -13,7 +13,7 @@ def index():
 @app.route('/accelerometer')
 def get_accelerometer_data():
     accelerometer = ADXL345()
-    data = accelerometer.getAxes(True)
+    data = accelerometer.get_axes(True)
     return jsonify(data)
 
 @app.route('/temperature')
@@ -26,7 +26,7 @@ def get_temperature_data():
 def stream_accelerometer_data():
     accelerometer = ADXL345()
     while True:
-        data = accelerometer.getAxes(True)
+        data = accelerometer.get_axes(True)
         emit('accelerometer_data', data)
         socketio.sleep(1)  # Update every 1 second
 
