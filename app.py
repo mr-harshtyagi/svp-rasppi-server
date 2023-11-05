@@ -13,7 +13,7 @@ pwm_pin = 18
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(pwm_pin, GPIO.OUT, initial=GPIO.LOW)
-pwmPin = GPIO.PWM(pwm_pin, 0)
+pwmPin = GPIO.PWM(pwm_pin, 1)
 pwmPin.start(0)
 socketio = SocketIO(app,cors_allowed_origins="*")  # Enable cross-origin access
 
