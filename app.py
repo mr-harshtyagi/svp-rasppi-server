@@ -29,14 +29,14 @@ def index():
     return render_template('index.html')
 
 @app.route('/set_pwm1', methods=['POST'])
-def set_pwm():
+def set_pwm1():
     print(request)
     duty_cycle = int(request.form['duty_cycle'])
     pwmPin1.ChangeDutyCycle(duty_cycle)
     return 'PWM duty cycle set to {}'.format(duty_cycle)
 
 @app.route('/set_pwm2', methods=['POST'])
-def set_pwm():
+def set_pwm2():
     duty_cycle = int(request.form['duty_cycle'])
     pwmPin2.ChangeDutyCycle(duty_cycle)
     return 'PWM duty cycle set to {}'.format(duty_cycle)
