@@ -33,7 +33,7 @@ def set_pwm1():
     print(request.form)
     duty_cycle = int(request.form['duty_cycle'])
     pwmPin1.ChangeDutyCycle(duty_cycle)
-    return 'PWM duty cycle set to {}'.format(duty_cycle)
+    return render_template('index.html')
 
 @app.route('/set_pwm2', methods=['POST'])
 def set_pwm2():
