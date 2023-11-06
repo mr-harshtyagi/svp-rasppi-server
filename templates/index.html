@@ -6,12 +6,24 @@
   <body>
     <h1>PWM Control</h1>
     <form method="post" action="/set_pwm1">
-      Duty Cycle:
+      Vibrate Structure:
       <input
         type="number"
         name="duty_cycle"
-        min="0"
-        max="100"
+        min="20"
+        max="40"
+        step="1"
+        required
+      />
+      <input type="submit" value="Set PWM" />
+    </form>
+    <form method="post" action="/set_pwm2">
+      Activate SMA:
+      <input
+        type="number"
+        name="duty_cycle"
+        min="20"
+        max="40"
         step="1"
         required
       />
