@@ -23,7 +23,7 @@ def index():
 
 def job():
     print("I'm connected to server!")
-    sio.emit('test', {'data': random.random()})  
+    sio.emit('test', {'data': random.random(), 'time': time.time()})  
 
 @sio.event
 def connect():
