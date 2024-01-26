@@ -27,7 +27,7 @@ def job():
 
 @sio.event
 def connect():
-    schedule.every(1).seconds.do(job)
+    schedule.every(0.01).seconds.do(job)
 
     while True:
         schedule.run_pending()
