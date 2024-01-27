@@ -23,7 +23,9 @@ def index():
 
 def job():
     print("I'm connected to server!")
-    sio.emit('clientMessage', {'data': random.random(), 'time': time.time()})  
+    data = {'data': random.random(), 'time': time.time()}
+    print("Sendind data : ",data)
+    sio.emit('clientMessage', data)  
 
 @sio.event
 def connect():
