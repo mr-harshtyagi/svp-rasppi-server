@@ -23,12 +23,11 @@ def index():
 
 def job():
     print("I'm connected to server!")
-    sio.emit('test', {'data': random.random(), 'time': time.time()})  
+    sio.emit('clientMessage', {'data': random.random(), 'time': time.time()})  
 
 @sio.event
 def connect():
     schedule.every(0.01).seconds.do(job)
-
     while True:
         schedule.run_pending()
 
