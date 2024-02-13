@@ -1,9 +1,8 @@
-from machine import ADC
+from gpiozero import MCP3008
 from time import sleep
 import math
 
-adcpin = 26
-thermistor = ADC(adcpin)
+adc = MCP3008(channel=0)
 
 # Voltage Divider
 Vin = 3.3
@@ -16,12 +15,10 @@ C = 0.0000000876741
 
 while True:
     # Get Voltage value from ADC   
-    adc = thermistor.read_u16()
-    Vout = (3.3/65535)*adc
+    Vout = adc.value * Vin
     
     # Calculate Resistance
     Rt = (Vout * Ro) / (Vin - Vout) 
-    # Rt = 10000  # Used for Testing. Setting Rt=10k should give TempC=25
     
     # Steinhart - Hart Equation
     TempK = 1 / (A + (B * math.log(Rt)) + C * math.pow(math.log(Rt), 3))
