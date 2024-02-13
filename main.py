@@ -41,7 +41,7 @@ def on_test(data):
     print('Reponse : ', data)
 
 # Backend Server
-sio.connect('http://localhost:4000')
+sio.connect('https://api.smsl.online/')
 
 if __name__ == '__main__':
     socketio.run(app)
