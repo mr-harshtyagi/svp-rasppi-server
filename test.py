@@ -9,37 +9,37 @@ import schedule
 import time
 import random
 
-from adxl345 import ADXL345
-from w1thermsensor import W1ThermSensor
-import RPi.GPIO as GPIO
+# from adxl345 import ADXL345
+# from w1thermsensor import W1ThermSensor
+# import RPi.GPIO as GPIO
 
 sio = socketio.Client()
 
 app = Flask(__name__)
 socketio = SocketIO(app)
 
-# Set the PWM pin number and frequency
-pwm_pin1 = 18
-pwm_pin2 = 19
+# # Set the PWM pin number and frequency
+# pwm_pin1 = 18
+# pwm_pin2 = 19
 
-# Initialize the PWM Pin 1
-GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BOARD)
-GPIO.setup(pwm_pin1, GPIO.OUT, initial=GPIO.LOW)
-pwmPin1 = GPIO.PWM(pwm_pin1, 100)
-pwmPin1.start(0)
+# # Initialize the PWM Pin 1
+# GPIO.setwarnings(False)
+# GPIO.setmode(GPIO.BOARD)
+# GPIO.setup(pwm_pin1, GPIO.OUT, initial=GPIO.LOW)
+# pwmPin1 = GPIO.PWM(pwm_pin1, 100)
+# pwmPin1.start(0)
 
-# Initialize the PWM Pin 2
-GPIO.setup(pwm_pin2, GPIO.OUT, initial=GPIO.LOW)
-pwmPin2 = GPIO.PWM(pwm_pin2, 100)
-pwmPin2.start(0)
+# # Initialize the PWM Pin 2
+# GPIO.setup(pwm_pin2, GPIO.OUT, initial=GPIO.LOW)
+# pwmPin2 = GPIO.PWM(pwm_pin2, 100)
+# pwmPin2.start(0)
 
-# set pwn duty cycle functions
-def set_pwm1(duty_cycle):
-    pwmPin1.ChangeDutyCycle(duty_cycle)
+# # set pwn duty cycle functions
+# def set_pwm1(duty_cycle):
+#     pwmPin1.ChangeDutyCycle(duty_cycle)
 
-def set_pwm2(duty_cycle):
-    pwmPin2.ChangeDutyCycle(duty_cycle)
+# def set_pwm2(duty_cycle):
+#     pwmPin2.ChangeDutyCycle(duty_cycle)
 
 
 # get sensor data functions
