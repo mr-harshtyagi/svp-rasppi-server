@@ -98,8 +98,10 @@ def connect():
 
 sio.on('serverResponse', on_server_response)
 
-# Backend Server
-sio.connect('https://api.smsl.online')
+try:
+    sio.connect('https://api.smsl.online')
+except socketio.exceptions.ConnectionError as e:
+    print(f"Failed to connect to server: {e}")
 
 if __name__ == '__main__':
-    socketio.run(app)
+    socketio.run(app) 
