@@ -61,7 +61,7 @@ def get_accelerometer_data():
 mrValue = 0
 smaValue = 0
 motorSpeed = 0
-interval = 0.1
+interval = 0.01
 
 # SocketIO Client
 # This job function sends data to the server every "interval" seconds
