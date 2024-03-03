@@ -76,7 +76,7 @@ def job():
         'time': time.time()
         }
     print("Sendind data to server : ",data)
-    sio.emit('raspPiMessage', data)  
+    sio.emit('svpRaspPiMessage', data)  
 
 def on_server_response(data):
     global mrValue, smaValue, motorSpeed
@@ -96,7 +96,7 @@ def connect():
     while True:
         schedule.run_pending()
 
-sio.on('serverResponse', on_server_response)
+sio.on('svpServerResponse', on_server_response)
 
 # try:
 #     sio.connect('https://api.smsl.online')
