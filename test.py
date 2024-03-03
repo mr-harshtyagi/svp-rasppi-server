@@ -103,7 +103,8 @@ sio.on('svpServerResponse', on_server_response)
 # except socketio.exceptions.ConnectionError as e:
 #     print(f"Failed to connect to server: {e}")
 
-sio.connect('https://api.smsl.online')
+sio.connect('https://api.smsl.online', auth={'token': 'rasppi-server-token','type':'experiment'})
+# sio.connect('http://localhost:4000', auth={'token': 'rasppi-server-token','type':'experiment'})
 
 if __name__ == '__main__':
     socketio.run(app) 
