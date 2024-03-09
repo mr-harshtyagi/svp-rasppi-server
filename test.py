@@ -27,7 +27,7 @@ pwm_pin1 = 32
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(pwm_pin1, GPIO.OUT)
 
-pwmPin1 = GPIO.PWM(pwm_pin1, 1037)
+pwmPin1 = GPIO.PWM(pwm_pin1, 2000)
 pwmPin1.start(0)  # 0% duty cycle
 
 mrValue = 0
