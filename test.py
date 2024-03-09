@@ -43,11 +43,6 @@ pwmPin1.start(0)  # 0% duty cycle
 def set_pwm1(duty_cycle):
     pwmPin1.ChangeDutyCycle(duty_cycle)
 
-# Stop PWM
-pwmPin1.stop()
-
-# Clean up GPIO
-GPIO.cleanup()
 
 # Initialize the PWM Pin 2
 # GPIO.setup(pwm_pin2, GPIO.OUT, initial=GPIO.LOW)
@@ -136,3 +131,4 @@ sio.connect('https://api.smsl.online', auth={'token': 'rasppi-server-token','typ
 
 if __name__ == '__main__':
     socketio.run(app) 
+
