@@ -23,11 +23,36 @@ pwm_pin1 = 18
 # pwm_pin2 = 19
 
 # Initialize the PWM Pin 1
-GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BOARD)
-GPIO.setup(pwm_pin1, GPIO.OUT, initial=GPIO.LOW)
-pwmPin1 = GPIO.PWM(pwm_pin1, 60)
-pwmPin1.start(0)
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(pwm_pin1, GPIO.OUT)
+pwmPin1 = GPIO.PWM(pwm_pin1, 100)
+
+
+mrValue = 0
+smaValue = 0
+motorSpeed = 0
+interval = 0.1
+
+# reading data from sensors
+temperature = 25
+acceleration = 0
+
+pwmPin1.start(0)  # 0% duty cycle
+
+try:
+    while True:
+        # Change duty cycle for varying intensity
+        pwmPin1.ChangeDutyCycle(motorSpeed)
+        time.sleep(0.1)
+        
+except KeyboardInterrupt:
+    pass
+
+# Stop PWM
+pwmPin1.stop()
+
+# Clean up GPIO
+GPIO.cleanup()
 
 # Initialize the PWM Pin 2
 # GPIO.setup(pwm_pin2, GPIO.OUT, initial=GPIO.LOW)
@@ -35,11 +60,11 @@ pwmPin1.start(0)
 # pwmPin2.start(0)
 
 # set pwn duty cycle functions
-def set_pwm1(duty_cycle):
-    pwmPin1.ChangeDutyCycle(duty_cycle)
+# def set_pwm1(duty_cycle):
+#     pwmPin1.ChangeDutyCycle(duty_cycle)
 
-def set_pwm2(duty_cycle):
-    pwmPin2.ChangeDutyCycle(duty_cycle)
+# def set_pwm2(duty_cycle):
+#     pwmPin2.ChangeDutyCycle(duty_cycle)
 
 
 # get sensor data functions
@@ -58,14 +83,7 @@ def get_accelerometer_data():
 # def index():
 #     return render_template('index.html')
 
-mrValue = 0
-smaValue = 0
-motorSpeed = 0
-interval = 0.1
 
-# reading data from sensors
-temperature = 25
-acceleration = 0
 
 # SocketIO Client
 # This job function sends data to the server every "interval" seconds
