@@ -20,14 +20,14 @@ socketio = SocketIO(app)
 
 # Set the PWM pin number and frequency
 pwm_pin1 = 18
-pwm_pin2 = 19
+# pwm_pin2 = 19
 
 # Initialize the PWM Pin 1
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(pwm_pin1, GPIO.OUT, initial=GPIO.LOW)
 pwmPin1 = GPIO.PWM(pwm_pin1, 100)
-pwmPin1.start(0)
+# pwmPin1.start(0)
 
 # Initialize the PWM Pin 2
 # GPIO.setup(pwm_pin2, GPIO.OUT, initial=GPIO.LOW)
