@@ -70,7 +70,7 @@ def get_accelerometer_data():
 # SocketIO Client
 # This job function sends data to the server every "interval" seconds
 def job():
-    global temperature, acceleration , mrValue, smaValue, motorSpeed, pre
+    global temperature, acceleration , mrValue, smaValue, motorSpeed, previousMotorSpeed
     # temperature = get_temperature_data()
     acceleration = get_accelerometer_data()
     if motorSpeed != previousMotorSpeed:
