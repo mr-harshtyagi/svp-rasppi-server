@@ -30,9 +30,9 @@ pwmPin1 = GPIO.PWM(pwm_pin1, 100)
 pwmPin1.start(0)
 
 # Initialize the PWM Pin 2
-GPIO.setup(pwm_pin2, GPIO.OUT, initial=GPIO.LOW)
-pwmPin2 = GPIO.PWM(pwm_pin2, 100)
-pwmPin2.start(0)
+# GPIO.setup(pwm_pin2, GPIO.OUT, initial=GPIO.LOW)
+# pwmPin2 = GPIO.PWM(pwm_pin2, 100)
+# pwmPin2.start(0)
 
 # set pwn duty cycle functions
 def set_pwm1(duty_cycle):
