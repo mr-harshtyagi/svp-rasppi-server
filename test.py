@@ -28,7 +28,6 @@ GPIO.setup(pwm_pin1, GPIO.OUT)
 pwmPin1 = GPIO.PWM(pwm_pin1, 100)
 pwmPin1.start(0)  # 0% duty cycle
 
-
 mrValue = 0
 smaValue = 0
 motorSpeed = 0
@@ -67,12 +66,10 @@ def get_accelerometer_data():
 # def index():
 #     return render_template('index.html')
 
-
-
 # SocketIO Client
 # This job function sends data to the server every "interval" seconds
 def job():
-    global temperature, acceleration
+    global temperature, acceleration , mrValue, smaValue, motorSpeed
     # temperature = get_temperature_data()
     acceleration = get_accelerometer_data()
     # print('Temperature:', temperature, 'Acceleration:', acceleration)
@@ -109,13 +106,15 @@ def on_server_response(data):
 
     # Trigger MR, SMA and motors based on above values received: TO DO
     print("Motor Speed : ", motorSpeed) 
-    set_pwm1(motorSpeed)
+    # set_pwm1(motorSpeed)
 
 @sio.event
 def connect():
-    schedule.every(interval).seconds.do(job)
+    # schedule.every(interval).seconds.do(job)
     while True:
-        schedule.run_pending()
+        job()
+        time.sleep(interval)
+        # schedule.run_pending()
 
 sio.on('svpServerResponse', on_server_response)
 
