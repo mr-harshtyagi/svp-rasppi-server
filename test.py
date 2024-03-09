@@ -52,7 +52,7 @@ def set_pwm2(duty_cycle):
 def get_accelerometer_data():
     accelerometer = ADXL345()
     data = accelerometer.get_axes(True)
-    return (data.y)
+    return (data.values()[1])
 
 # @app.route('/')
 # def index():
