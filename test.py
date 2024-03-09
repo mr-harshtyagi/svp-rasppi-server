@@ -8,6 +8,7 @@ import socketio
 import schedule
 import time
 import random
+import threading
 
 from adxl345 import ADXL345
 from w1thermsensor import W1ThermSensor
