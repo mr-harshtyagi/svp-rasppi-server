@@ -26,7 +26,7 @@ pwm_pin1 = 18
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(pwm_pin1, GPIO.OUT, initial=GPIO.LOW)
-pwmPin1 = GPIO.PWM(pwm_pin1, 100)
+pwmPin1 = GPIO.PWM(pwm_pin1, 60)
 pwmPin1.start(0)
 
 # Initialize the PWM Pin 2
