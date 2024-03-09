@@ -73,7 +73,7 @@ def job():
     global temperature, acceleration
     # temperature = get_temperature_data()
     acceleration = get_accelerometer_data()
-    print('Temperature:', temperature, 'Acceleration:', acceleration)
+    # print('Temperature:', temperature, 'Acceleration:', acceleration)
     # get acc and temo data points from sensors and set data here : TO DO
     # data = {
     #     'smaValue':smaValue,
@@ -106,6 +106,8 @@ def on_server_response(data):
     motorSpeed = data['motorSpeed']
 
     # Trigger MR, SMA and motors based on above values received: TO DO
+    print("Motor Speed : ", motorSpeed) 
+    set_pwm1(motorSpeed)
 
 @sio.event
 def connect():
