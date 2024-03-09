@@ -44,10 +44,10 @@ def set_pwm2(duty_cycle):
 
 # get sensor data functions
 
-def get_temperature_data():
-    sensor = W1ThermSensor()
-    temperature = sensor.get_temperature()
-    return jsonify({'temperature': temperature})
+# def get_temperature_data():
+#     sensor = W1ThermSensor()
+#     temperature = sensor.get_temperature()
+#     return jsonify({'temperature': temperature})
 
 def get_accelerometer_data():
     accelerometer = ADXL345()
@@ -71,8 +71,8 @@ acceleration = 0
 # This job function sends data to the server every "interval" seconds
 def job():
     global temperature, acceleration
-    temperature = get_accelerometer_data()
-    acceleration = get_temperature_data()
+    # temperature = get_temperature_data()
+    acceleration = get_accelerometer_data()
     print('Temperature:', temperature, 'Acceleration:', acceleration)
     # get acc and temo data points from sensors and set data here : TO DO
     data = {
