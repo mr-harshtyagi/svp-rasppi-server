@@ -52,7 +52,7 @@ def get_temperature_data():
 def get_accelerometer_data():
     accelerometer = ADXL345()
     data = accelerometer.get_axes(True)
-    return jsonify(data)
+    return (data)
 
 # @app.route('/')
 # def index():
