@@ -63,9 +63,17 @@ smaValue = 0
 motorSpeed = 0
 interval = 0.1
 
+# reading data from sensors
+temperature = 25
+acceleration = 0
+
 # SocketIO Client
 # This job function sends data to the server every "interval" seconds
 def job():
+    global temperature, acceleration
+    temperature = get_accelerometer_data()
+    acceleration = get_temperature_data()
+    print('Temperature:', temperature, 'Acceleration:', acceleration)
     # get acc and temo data points from sensors and set data here : TO DO
     data = {
         'smaValue':smaValue,
@@ -75,7 +83,8 @@ def job():
         'acc': round(random.random()*10, 2),
         'time': time.time()
         }
-    print("Sendind data to server : ",data)
+    # print("Sendind data to server : ",data)
+
     sio.emit('svpRaspPiMessage', data)  
 
 def on_server_response(data):
