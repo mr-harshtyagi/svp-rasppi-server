@@ -32,6 +32,7 @@ mrValue = 0
 smaValue = 0
 motorSpeed = 0
 interval = 0.1
+previousMotorSpeed = None
 
 # reading data from sensors
 temperature = 25
@@ -69,9 +70,12 @@ def get_accelerometer_data():
 # SocketIO Client
 # This job function sends data to the server every "interval" seconds
 def job():
-    global temperature, acceleration , mrValue, smaValue, motorSpeed
+    global temperature, acceleration , mrValue, smaValue, motorSpeed, pre
     # temperature = get_temperature_data()
     acceleration = get_accelerometer_data()
+    if motorSpeed != previousMotorSpeed:
+        pwmPin1.ChangeDutyCycle(motorSpeed)
+        previousMotorSpeed = motorSpeed
     # print('Temperature:', temperature, 'Acceleration:', acceleration)
     # get acc and temo data points from sensors and set data here : TO DO
     # data = {
@@ -106,7 +110,7 @@ def on_server_response(data):
 
     # Trigger MR, SMA and motors based on above values received: TO DO
     print("Motor Speed : ", motorSpeed) 
-    set_pwm1(motorSpeed)
+    # set_pwm1(motorSpeed)
 
 @sio.event
 def connect():
