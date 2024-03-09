@@ -75,13 +75,21 @@ def job():
     acceleration = get_accelerometer_data()
     print('Temperature:', temperature, 'Acceleration:', acceleration)
     # get acc and temo data points from sensors and set data here : TO DO
+    # data = {
+    #     'smaValue':smaValue,
+    #     'mrValue':mrValue,
+    #     'motorSpeed':motorSpeed,
+    #     'temp': round(40 + random.random()*40, 2),
+    #     'acc': round(random.random()*10, 2),
+    #     'time': time.time()
+    #     }
     data = {
         'smaValue':smaValue,
         'mrValue':mrValue,
         'motorSpeed':motorSpeed,
-        'temp': round(40 + random.random()*40, 2),
-        'acc': round(random.random()*10, 2),
-        'time': time.time()
+        'temp': temperature,
+        'acc': acceleration,
+        # 'time': time.time()
         }
     # print("Sendind data to server : ",data)
 
