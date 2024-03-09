@@ -79,7 +79,6 @@ def job():
             print("Setting motor speed to : ", motorSpeed)
             pwmPin1.ChangeDutyCycle(motorSpeed)
             previousMotorSpeed = motorSpeed
-        sleep(interval)
         # print('Temperature:', temperature, 'Acceleration:', acceleration)
         # get acc and temo data points from sensors and set data here : TO DO
         # data = {
@@ -101,6 +100,7 @@ def job():
         # print("Sendind data to server : ",data)
 
         sio.emit('svpRaspPiMessage', data)  
+        time.sleep(interval)
 
 def start_job_in_new_thread():
     print('Starting job in new thread')
