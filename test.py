@@ -72,31 +72,39 @@ def get_accelerometer_data():
 def job():
     global temperature, acceleration , mrValue, smaValue, motorSpeed, previousMotorSpeed
     # temperature = get_temperature_data()
-    acceleration = get_accelerometer_data()
-    if motorSpeed != previousMotorSpeed:
-        pwmPin1.ChangeDutyCycle(motorSpeed)
-        previousMotorSpeed = motorSpeed
-    # print('Temperature:', temperature, 'Acceleration:', acceleration)
-    # get acc and temo data points from sensors and set data here : TO DO
-    # data = {
-    #     'smaValue':smaValue,
-    #     'mrValue':mrValue,
-    #     'motorSpeed':motorSpeed,
-    #     'temp': round(40 + random.random()*40, 2),
-    #     'acc': round(random.random()*10, 2),
-    #     'time': time.time()
-    #     }
-    data = {
-        'smaValue':smaValue,
-        'mrValue':mrValue,
-        'motorSpeed':motorSpeed,
-        'temp': temperature,
-        'acc': acceleration,
-        # 'time': time.time()
-        }
-    # print("Sendind data to server : ",data)
+    while True:
+        acceleration = get_accelerometer_data()
+        if motorSpeed != previousMotorSpeed:
+            print("Setting motor speed to : ", motorSpeed)
+            pwmPin1.ChangeDutyCycle(motorSpeed)
+            previousMotorSpeed = motorSpeed
+        sleep(interval)
+        # print('Temperature:', temperature, 'Acceleration:', acceleration)
+        # get acc and temo data points from sensors and set data here : TO DO
+        # data = {
+        #     'smaValue':smaValue,
+        #     'mrValue':mrValue,
+        #     'motorSpeed':motorSpeed,
+        #     'temp': round(40 + random.random()*40, 2),
+        #     'acc': round(random.random()*10, 2),
+        #     'time': time.time()
+        #     }
+        data = {
+            'smaValue':smaValue,
+            'mrValue':mrValue,
+            'motorSpeed':motorSpeed,
+            'temp': temperature,
+            'acc': acceleration,
+            # 'time': time.time()
+            }
+        # print("Sendind data to server : ",data)
 
-    sio.emit('svpRaspPiMessage', data)  
+        sio.emit('svpRaspPiMessage', data)  
+
+def start_job_in_new_thread():
+    print('Starting job in new thread')
+    thread = threading.Thread(target=job)
+    thread.start()
 
 def on_server_response(data):
     global mrValue, smaValue, motorSpeed
@@ -115,10 +123,10 @@ def on_server_response(data):
 @sio.event
 def connect():
     # schedule.every(interval).seconds.do(job)
-    while True:
-        job()
-        time.sleep(interval)
-        # schedule.run_pending()
+    # while True:
+    #     schedule.run_pending()
+    print('connection established, start job')
+    start_job_in_new_thread()
 
 sio.on('svpServerResponse', on_server_response)
 
