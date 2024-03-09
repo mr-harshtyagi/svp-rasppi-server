@@ -26,6 +26,7 @@ pwm_pin1 = 32
 # Initialize the PWM Pin 1
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(pwm_pin1, GPIO.OUT)
+
 pwmPin1 = GPIO.PWM(pwm_pin1, 100)
 pwmPin1.start(0)  # 0% duty cycle
 
@@ -60,9 +61,14 @@ def set_pwm1(duty_cycle):
 #     return jsonify({'temperature': temperature})
 
 def get_accelerometer_data():
-    accelerometer = ADXL345()
-    data = accelerometer.get_axes(True)
-    return ( data['y'])
+
+    try:
+        accelerometer = ADXL345()
+        data = accelerometer.get_axes(True)
+        return (data['y'])
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return None
 
 # @app.route('/')
 # def index():
@@ -118,7 +124,7 @@ def on_server_response(data):
     motorSpeed = data['motorSpeed']
 
     # Trigger MR, SMA and motors based on above values received: TO DO
-    print("Motor Speed : ", motorSpeed) 
+    # print("Motor Speed : ", motorSpeed) 
     # set_pwm1(motorSpeed)
 
 @sio.event
