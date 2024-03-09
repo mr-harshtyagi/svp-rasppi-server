@@ -61,14 +61,14 @@ def set_pwm1(duty_cycle):
 #     return jsonify({'temperature': temperature})
 
 def get_accelerometer_data():
-
+    global acceleration
     try:
         accelerometer = ADXL345()
         data = accelerometer.get_axes(True)
         return (data['y'])
     except Exception as e:
         print(f"An error occurred: {e}")
-        return None
+        return acceleration
 
 # @app.route('/')
 # def index():
