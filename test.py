@@ -39,14 +39,9 @@ acceleration = 0
 
 pwmPin1.start(0)  # 0% duty cycle
 
-try:
-    while True:
-        # Change duty cycle for varying intensity
-        pwmPin1.ChangeDutyCycle(motorSpeed)
-        time.sleep(0.1)
-        
-except KeyboardInterrupt:
-    pass
+# set pwn duty cycle functions
+def set_pwm1(duty_cycle):
+    pwmPin1.ChangeDutyCycle(duty_cycle)
 
 # Stop PWM
 pwmPin1.stop()
@@ -58,10 +53,6 @@ GPIO.cleanup()
 # GPIO.setup(pwm_pin2, GPIO.OUT, initial=GPIO.LOW)
 # pwmPin2 = GPIO.PWM(pwm_pin2, 100)
 # pwmPin2.start(0)
-
-# set pwn duty cycle functions
-# def set_pwm1(duty_cycle):
-#     pwmPin1.ChangeDutyCycle(duty_cycle)
 
 # def set_pwm2(duty_cycle):
 #     pwmPin2.ChangeDutyCycle(duty_cycle)
@@ -125,7 +116,7 @@ def on_server_response(data):
 
     # Trigger MR, SMA and motors based on above values received: TO DO
     print("Motor Speed : ", motorSpeed) 
-    # set_pwm1(motorSpeed)
+    set_pwm1(motorSpeed)
 
 @sio.event
 def connect():
