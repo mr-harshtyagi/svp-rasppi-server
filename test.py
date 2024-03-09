@@ -42,8 +42,7 @@ acceleration = 0
 def set_pwm1(duty_cycle):
     pwmPin1.start(0)  # 0% duty cycle
     pwmPin1.ChangeDutyCycle(duty_cycle)
-    pwmPin1.stop()
-    GPIO.cleanup()
+    
 
 # Initialize the PWM Pin 2
 # GPIO.setup(pwm_pin2, GPIO.OUT, initial=GPIO.LOW)
