@@ -125,7 +125,7 @@ def on_server_response(data):
 
     # Trigger MR, SMA and motors based on above values received: TO DO
     print("Motor Speed : ", motorSpeed) 
-    set_pwm1(motorSpeed)
+    # set_pwm1(motorSpeed)
 
 @sio.event
 def connect():
