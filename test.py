@@ -19,7 +19,7 @@ app = Flask(__name__)
 socketio = SocketIO(app)
 
 # Set the PWM pin number and frequency
-pwm_pin1 = 18
+pwm_pin1 = 32
 # pwm_pin2 = 19
 
 # Initialize the PWM Pin 1
