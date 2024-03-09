@@ -32,7 +32,7 @@ mrValue = 0
 smaValue = 0
 motorSpeed = 0
 interval = 0.1
-previousMotorSpeed = None
+previousMotorSpeed = 0
 
 # reading data from sensors
 temperature = 25
