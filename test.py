@@ -27,13 +27,13 @@ pwm_pin1 = 32
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(pwm_pin1, GPIO.OUT)
 
-pwmPin1 = GPIO.PWM(pwm_pin1, 100)
+pwmPin1 = GPIO.PWM(pwm_pin1, 10)
 pwmPin1.start(0)  # 0% duty cycle
 
 mrValue = 0
 smaValue = 0
 motorSpeed = 0
-interval = 1
+interval = 0.1
 previousMotorSpeed = 0
 
 # reading data from sensors
