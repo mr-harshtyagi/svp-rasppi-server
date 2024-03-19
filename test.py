@@ -82,7 +82,7 @@ def get_accelerometer_data():
     global acceleration
     try:
         accelerometer = ADXL345()
-        data = accelerometer.get_axes(True)
+        data = accelerometer.get_axes()
         print("X: %.3fG" % data['x'])
         print("Y: %.3fG" % data['y'])
         print("Z: %.3fG" % data['z'])
