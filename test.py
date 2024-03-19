@@ -84,6 +84,7 @@ def get_accelerometer_data():
         accelerometer = ADXL345()
         data = accelerometer.get_axes()
         print(data)
+        return data['y']
     
     except Exception as e:
         print(f"An error occurred: {e}")
