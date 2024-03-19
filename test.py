@@ -45,7 +45,7 @@ pwmPin3.start(0)
 mrValue = 0
 smaValue = 0
 motorSpeed = 0
-interval = 0.01
+interval = 0.1
 previousMotorSpeed = 0
 
 # reading data from sensors
