@@ -21,6 +21,8 @@ socketio = SocketIO(app)
 
 # Set the PWM pin number and frequency
 pwm_pin1 = 32
+pwm_pin2 = 33
+pwm_pin3 = 12
 # pwm_pin2 = 19
 
 # Initialize the PWM Pin 1
@@ -29,6 +31,16 @@ GPIO.setup(pwm_pin1, GPIO.OUT)
 
 pwmPin1 = GPIO.PWM(pwm_pin1, 100)
 pwmPin1.start(0)  # 0% duty cycle
+
+# Initialize the PWM Pin 2
+GPIO.setup(pwm_pin2, GPIO.OUT, initial=GPIO.LOW)
+pwmPin2 = GPIO.PWM(pwm_pin2, 100)
+pwmPin2.start(0)
+
+# Initialize the PWM Pin 3
+GPIO.setup(pwm_pin3, GPIO.OUT, initial=GPIO.LOW)
+pwmPin3 = GPIO.PWM(pwm_pin3, 100)
+pwmPin3.start(0)
 
 mrValue = 0
 smaValue = 0
@@ -43,6 +55,12 @@ acceleration = 0
 # set pwn duty cycle functions
 def set_pwm1(duty_cycle):
     pwmPin1.ChangeDutyCycle(duty_cycle)
+
+def set_pwm2(duty_cycle):
+    pwmPin2.ChangeDutyCycle(duty_cycle)
+
+def set_pwm3(duty_cycle):
+    pwmPin3.ChangeDutyCycle(duty_cycle)
 
 # Initialize the PWM Pin 2
 # GPIO.setup(pwm_pin2, GPIO.OUT, initial=GPIO.LOW)
@@ -81,10 +99,10 @@ def job():
     # temperature = get_temperature_data()
     while True:
         acceleration = get_accelerometer_data()
-        if motorSpeed != previousMotorSpeed:
-            print("Setting motor speed to : ", motorSpeed)
-            pwmPin1.ChangeDutyCycle(motorSpeed)
-            previousMotorSpeed = motorSpeed
+        # if motorSpeed != previousMotorSpeed:
+        #     print("Setting motor speed to : ", motorSpeed)
+        #     pwmPin1.ChangeDutyCycle(motorSpeed)
+        #     previousMotorSpeed = motorSpeed
         # print('Temperature:', temperature, 'Acceleration:', acceleration)
         # get acc and temo data points from sensors and set data here : TO DO
         # data = {
@@ -124,8 +142,12 @@ def on_server_response(data):
     motorSpeed = data['motorSpeed']
 
     # Trigger MR, SMA and motors based on above values received: TO DO
-    # print("Motor Speed : ", motorSpeed) 
-    # set_pwm1(motorSpeed)
+    print("Motor Speed : ", motorSpeed) 
+    set_pwm1(motorSpeed)
+    print("MR Value : ", mrValue)
+    set_pwm3(mrValue)
+    print("SMA Value : ", smaValue)
+    set_pwm2(smaValue)
 
 @sio.event
 def connect():
