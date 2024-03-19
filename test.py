@@ -49,7 +49,7 @@ interval = 0.1
 previousMotorSpeed = 0
 
 # reading data from sensors
-temperature = 25
+temperature = 85
 acceleration = 0
 
 # set pwn duty cycle functions
@@ -144,10 +144,10 @@ def on_server_response(data):
     # Trigger MR, SMA and motors based on above values received: TO DO
     print("Motor Speed : ", motorSpeed) 
     set_pwm1(motorSpeed)
-    print("MR Value : ", mrValue)
-    set_pwm3(mrValue)
     print("SMA Value : ", smaValue)
     set_pwm2(smaValue)
+    print("MR Value : ", mrValue)
+    set_pwm3(mrValue)
 
 @sio.event
 def connect():
