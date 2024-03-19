@@ -49,7 +49,7 @@ interval = 0.1
 previousMotorSpeed = 0
 
 # reading data from sensors
-temperature = 85
+temperature = 95
 acceleration = 0
 
 # set pwn duty cycle functions
