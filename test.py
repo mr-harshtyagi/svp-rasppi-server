@@ -29,7 +29,7 @@ pwm_pin3 = 12
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(pwm_pin1, GPIO.OUT)
 
-pwmPin1 = GPIO.PWM(pwm_pin1, 100)
+pwmPin1 = GPIO.PWM(pwm_pin1, 1000)
 pwmPin1.start(0)  # 0% duty cycle
 
 # Initialize the PWM Pin 2
