@@ -83,6 +83,9 @@ def get_accelerometer_data():
     try:
         accelerometer = ADXL345()
         data = accelerometer.get_axes(True)
+        print("X: %.3fG" % data['x'])
+        print("Y: %.3fG" % data['y'])
+        print("Z: %.3fG" % data['z'])
         return (data['y'])
     except Exception as e:
         print(f"An error occurred: {e}")
