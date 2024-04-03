@@ -83,7 +83,7 @@ def get_accelerometer_data():
     try:
         accelerometer = ADXL345()
         data = accelerometer.get_axes()
-        print(data)
+        # print(data)
         return data['y']
     
     except Exception as e:
@@ -123,7 +123,7 @@ def job():
             'acc': acceleration,
             # 'time': time.time()
             }
-        # print("Sendind data to server : ",data)
+        # print("Sending data to server : ",data)
 
         sio.emit('svpRaspPiMessage', data)  
         time.sleep(interval)
@@ -144,7 +144,7 @@ def on_server_response(data):
     motorSpeed = data['motorSpeed']
 
     # Trigger MR, SMA and motors based on above values received: TO DO
-    print("Motor Speed : ", motorSpeed) 
+    print("Motor Speed : ", motorSpeed)
     set_pwm1(motorSpeed)
     print("SMA Value : ", smaValue)
     set_pwm2(smaValue)
