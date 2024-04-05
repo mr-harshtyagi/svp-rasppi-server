@@ -62,7 +62,8 @@ def set_pwm2(duty_cycle):
 def set_pwm3(duty_cycle):
     pwmPin3.ChangeDutyCycle(duty_cycle)
 
-def get_temperature_data():
+# read and update sensor data
+def read_and_update_temperature_data():
     global temperature
     try:
         sensor = W1ThermSensor()
@@ -74,7 +75,7 @@ def get_temperature_data():
         print(f"An error occurred: {e}")
         return temperature
 
-def get_accelerometer_data():
+def read_and_update_accelerometer_data():
     global acceleration
     try:
         accelerometer = ADXL345()
@@ -90,10 +91,7 @@ def get_accelerometer_data():
 # This job function sends data to the server every "interval" seconds
 def job():
     global temperature, acceleration , mrValue, smaValue, motorSpeed, previousMotorSpeed
-    # temperature = get_temperature_data()
     while True:
-        acceleration = get_accelerometer_data()
-        # temperature = get_temperature_data()
         data = {
             'smaValue':smaValue,
             'mrValue':mrValue,
@@ -120,11 +118,11 @@ def on_server_response(data):
     motorSpeed = data['motorSpeed']
 
     # Trigger MR, SMA and motors based on above values received: TO DO
-    print("Motor Speed : ", motorSpeed)
+    print("Setting Motor Speed to: ", motorSpeed)
     set_pwm1(motorSpeed)
-    print("SMA Value : ", smaValue)
+    print("Setting SMA Value to: ", smaValue)
     set_pwm2(smaValue)
-    print("MR Value : ", mrValue)
+    print("Setting MR Value to: ", mrValue)
     set_pwm3(mrValue)
 
 @sio.event
