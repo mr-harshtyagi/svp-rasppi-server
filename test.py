@@ -1,7 +1,6 @@
 # Running on Raspberry Pi 4B
 from flask import Flask, render_template
 from flask_socketio import SocketIO, emit
-# import asyncio
 import websockets
 import json
 import socketio
@@ -9,6 +8,7 @@ import schedule
 import time
 import random
 import threading
+from time import sleep
 
 from adxl345 import ADXL345
 from w1thermsensor import W1ThermSensor
