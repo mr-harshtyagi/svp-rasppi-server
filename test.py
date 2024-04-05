@@ -62,22 +62,16 @@ def set_pwm2(duty_cycle):
 def set_pwm3(duty_cycle):
     pwmPin3.ChangeDutyCycle(duty_cycle)
 
-# Initialize the PWM Pin 2
-# GPIO.setup(pwm_pin2, GPIO.OUT, initial=GPIO.LOW)
-# pwmPin2 = GPIO.PWM(pwm_pin2, 100)
-# pwmPin2.start(0)
-
-# def set_pwm2(duty_cycle):
-#     pwmPin2.ChangeDutyCycle(duty_cycle)
-
-
-# get sensor data functions
-
 def get_temperature_data():
-    sensor = W1ThermSensor()
-    temperature = sensor.get_temperature()
-    print(f"Temperature: {temperature}")
-    return temperature
+    global temperature
+    try:
+        sensor = W1ThermSensor()
+        temperature = sensor.get_temperature()
+        print(f"Temperature: {temperature}")
+        return temperature
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return temperature
 
 def get_accelerometer_data():
     global acceleration
@@ -91,10 +85,6 @@ def get_accelerometer_data():
         print(f"An error occurred: {e}")
         return acceleration
 
-# @app.route('/')
-# def index():
-#     return render_template('index.html')
-
 # SocketIO Client
 # This job function sends data to the server every "interval" seconds
 def job():
@@ -103,29 +93,13 @@ def job():
     while True:
         acceleration = get_accelerometer_data()
         temperature = get_temperature_data()
-        # if motorSpeed != previousMotorSpeed:
-        #     print("Setting motor speed to : ", motorSpeed)
-        #     pwmPin1.ChangeDutyCycle(motorSpeed)
-        #     previousMotorSpeed = motorSpeed
-        # print('Temperature:', temperature, 'Acceleration:', acceleration)
-        # get acc and temo data points from sensors and set data here : TO DO
-        # data = {
-        #     'smaValue':smaValue,
-        #     'mrValue':mrValue,
-        #     'motorSpeed':motorSpeed,
-        #     'temp': round(40 + random.random()*40, 2),
-        #     'acc': round(random.random()*10, 2),
-        #     'time': time.time()
-        #     }
         data = {
             'smaValue':smaValue,
             'mrValue':mrValue,
             'motorSpeed':motorSpeed,
             'temp': temperature,
             'acc': acceleration,
-            # 'time': time.time()
             }
-        # print("Sending data to server : ",data)
         sio.emit('svpRaspPiMessage', data)
         time.sleep(interval)
 
@@ -154,18 +128,10 @@ def on_server_response(data):
 
 @sio.event
 def connect():
-    # schedule.every(interval).seconds.do(job)
-    # while True:
-    #     schedule.run_pending()
     print('connection established, start job')
     start_job_in_new_thread()
 
 sio.on('svpServerResponse', on_server_response)
-
-# try:
-#     sio.connect('https://api.smsl.online')
-# except socketio.exceptions.ConnectionError as e:
-#     print(f"Failed to connect to server: {e}")
 
 sio.connect('https://api.smsl.online', auth={'token': 'rasppi-server-token','type':'experiment'})
 # sio.connect('http://localhost:4000', auth={'token': 'rasppi-server-token','type':'experiment'})
