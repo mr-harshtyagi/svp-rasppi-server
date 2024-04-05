@@ -73,10 +73,10 @@ def set_pwm3(duty_cycle):
 
 # get sensor data functions
 
-# def get_temperature_data():
-#     sensor = W1ThermSensor()
-#     temperature = sensor.get_temperature()
-#     return jsonify({'temperature': temperature})
+def get_temperature_data():
+    sensor = W1ThermSensor()
+    temperature = sensor.get_temperature()
+    return jsonify({'temperature': temperature})
 
 def get_accelerometer_data():
     global acceleration
@@ -101,6 +101,7 @@ def job():
     # temperature = get_temperature_data()
     while True:
         acceleration = get_accelerometer_data()
+        temperature = get_temperature_data()
         # if motorSpeed != previousMotorSpeed:
         #     print("Setting motor speed to : ", motorSpeed)
         #     pwmPin1.ChangeDutyCycle(motorSpeed)
@@ -124,8 +125,7 @@ def job():
             # 'time': time.time()
             }
         # print("Sending data to server : ",data)
-
-        sio.emit('svpRaspPiMessage', data)  
+        sio.emit('svpRaspPiMessage', data)
         time.sleep(interval)
 
 def start_job_in_new_thread():
