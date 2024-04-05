@@ -77,7 +77,7 @@ def get_temperature_data():
     sensor = W1ThermSensor()
     temperature = sensor.get_temperature()
     print(f"Temperature: {temperature}")
-    return 30
+    return temperature
 
 def get_accelerometer_data():
     global acceleration
