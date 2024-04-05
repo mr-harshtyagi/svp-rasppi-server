@@ -38,7 +38,10 @@ pin = 4
 # to 15 times to get a sensor reading (waiting 2 seconds between each retry).
 while True:
     humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
-    print('Temp={0:0.1f}*C  Humidity={1:0.1f}%'.format(temperature, humidity))
+    if humidity is not None and temperature is not None:
+        print('Temp={0:0.1f}*C  Humidity={1:0.1f}%'.format(temperature, humidity))
+    else:
+        print('Failed to get reading. Try again!')
 '''
 # Note that sometimes you won't get a reading and
 # the results will be null (because Linux can't
