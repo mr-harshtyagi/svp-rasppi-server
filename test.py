@@ -67,6 +67,7 @@ def get_temperature_data():
     try:
         sensor = W1ThermSensor()
         temperature = sensor.get_temperature()
+        sleep(1)
         print(f"Temperature: {temperature}")
         return temperature
     except Exception as e:
