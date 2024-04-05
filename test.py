@@ -65,26 +65,26 @@ def set_pwm3(duty_cycle):
 # read and update sensor data
 def read_and_update_temperature_data():
     global temperature
-    try:
-        sensor = W1ThermSensor()
-        temperature = sensor.get_temperature()
-        print(f"Temperature: {temperature}")
-    except Exception as e:
-        print(f"An error occurred: {e}")
-        return temperature
-    time.sleep(interval)
+    while True:
+        try:
+            sensor = W1ThermSensor()
+            temperature = sensor.get_temperature()
+            print(f"Temperature: {temperature}")
+        except Exception as e:
+            print(f"An error occurred: {e}")
+        time.sleep(interval)
 
 def read_and_update_accelerometer_data():
     global acceleration
-    try:
-        accelerometer = ADXL345()
-        data = accelerometer.get_axes()
-        print(f"Acceleration: {data['y']}")
-        acceleration = data['y']
-    except Exception as e:
-        print(f"An error occurred: {e}")
-        return acceleration
-    time.sleep(interval)
+    while True:
+        try:
+            accelerometer = ADXL345()
+            data = accelerometer.get_axes()
+            print(f"Acceleration: {data['y']}")
+            acceleration = data['y']
+        except Exception as e:
+            print(f"An error occurred: {e}")
+        time.sleep(interval)
 
 # SocketIO Client
 # This job function sends data to the server every "interval" seconds
@@ -108,7 +108,7 @@ def start_job_in_new_thread():
     thread2 = threading.Thread(target=read_and_update_temperature_data)
     thread2.start()
     thread3 = threading.Thread(target=read_and_update_accelerometer_data)
-    thread3
+    thread3.start()
 
 
 def on_server_response(data):
