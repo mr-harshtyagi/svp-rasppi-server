@@ -68,24 +68,23 @@ def read_and_update_temperature_data():
     try:
         sensor = W1ThermSensor()
         temperature = sensor.get_temperature()
-        sleep(1)
         print(f"Temperature: {temperature}")
-        return temperature
     except Exception as e:
         print(f"An error occurred: {e}")
         return temperature
+    time.sleep(interval)
 
 def read_and_update_accelerometer_data():
     global acceleration
     try:
         accelerometer = ADXL345()
         data = accelerometer.get_axes()
-        # print(data)
-        return data['y']
-    
+        print(f"Acceleration: {data['y']}")
+        acceleration = data['y']
     except Exception as e:
         print(f"An error occurred: {e}")
         return acceleration
+    time.sleep(interval)
 
 # SocketIO Client
 # This job function sends data to the server every "interval" seconds
@@ -104,13 +103,17 @@ def job():
 
 def start_job_in_new_thread():
     print('Starting job in new thread')
-    thread = threading.Thread(target=job)
-    thread.start()
+    thread1 = threading.Thread(target=job)
+    thread1.start()
+    thread2 = threading.Thread(target=read_and_update_temperature_data)
+    thread2.start()
+    thread3 = threading.Thread(target=read_and_update_accelerometer_data)
+    thread3
+
 
 def on_server_response(data):
     global mrValue, smaValue, motorSpeed
     print('I received a response from server!')
-
     # If you want to access the data sent with the event:
     print('Response : ', data)
     mrValue = data['mrValue']
