@@ -76,7 +76,8 @@ def set_pwm3(duty_cycle):
 def get_temperature_data():
     sensor = W1ThermSensor()
     temperature = sensor.get_temperature()
-    return jsonify({'temperature': temperature})
+    print(f"Temperature: {temperature}")
+    return 30
 
 def get_accelerometer_data():
     global acceleration
