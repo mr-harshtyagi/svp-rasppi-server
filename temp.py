@@ -1,13 +1,17 @@
-import Adafruit_DHT
+import RPi.GPIO as GPIO
+import dht11
 
-sensor = Adafruit_DHT.DHT11
+# initialize GPIO
+GPIO.setwarnings(False)
+GPIO.setmode(GPIO.BCM)
+GPIO.cleanup()
 
-pin = 21
+# read data using pin 21
+instance = dht11.DHT11(pin = 21)
+result = instance.read()
 
-while True:
-    humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
-    if humidity is not None and temperature is not None:
-        print('Temp={0}*C  Humidity={1}%'.format(temperature, humidity))
-        time.sleep(60)
-    else:
-        print('Failed to get reading. Try again!')
+if result.is_valid():
+    print("Temperature: %-3.1f C" % result.temperature)
+    print("Humidity: %-3.1f %%" % result.humidity)
+else:
+    print("Error: %d" % result.error_code)
