@@ -93,7 +93,7 @@ def job():
     # temperature = get_temperature_data()
     while True:
         acceleration = get_accelerometer_data()
-        temperature = get_temperature_data()
+        # temperature = get_temperature_data()
         data = {
             'smaValue':smaValue,
             'mrValue':mrValue,
