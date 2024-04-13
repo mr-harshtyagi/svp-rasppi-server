@@ -80,7 +80,7 @@ def read_and_update_accelerometer_data():
         try:
             accelerometer = ADXL345()
             data = accelerometer.get_axes()
-            print(f"Acceleration: {data['y']}")
+            # print(f"Acceleration: {data['y']}")
             acceleration = data['y']
         except Exception as e:
             print(f"An error occurred: {e}")
