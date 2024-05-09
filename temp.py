@@ -1,4 +1,5 @@
 from w1thermsensor import W1ThermSensor 
+import time
 from time import sleep
  
 def read_temp():
